@@ -97,8 +97,8 @@ app.get("/div/:primeiroNumero/:segundoNumero", (req, res) => {
         .send(`Campos obrigatórios não preenchidos ou inválidos!`);
     }
 
-    if (segundoNumero == 0){
-      return res.status(400).send(`IMPOSSIVEL DIVIDIR POR ZERO!!!!`)
+    if (segundoNumero == 0) {
+      return res.status(400).send(`IMPOSSIVEL DIVIDIR POR ZERO!!!!`);
     }
     const div = parseFloat(primeiroNumero) / parseFloat(segundoNumero);
 

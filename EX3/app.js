@@ -4,7 +4,7 @@ const PORT = 8081;
 
 app.get("/operação", (req, res) => {
   try {
-    const { adicao, subtracao, multiplicacao, divisao } = req.param;
+    const { operacao } = req.query; // pegar operação da query
     const { primeiroNumero, segundoNumero } = req.query;
 
     if (
@@ -22,25 +22,27 @@ app.get("/operação", (req, res) => {
 
     const soma = parseFloat(primeiroNumero) + parseFloat(segundoNumero);
     const sub = parseFloat(primeiroNumero) - parseFloat(segundoNumero);
-    const mult = parseFloat(primeiroNumero) / parseFloat(segundoNumero);
-    const div = parseFloat(primeiroNumero) * parseFloat(segundoNumero);
+    const mult = parseFloat(primeiroNumero) * parseFloat(segundoNumero);
+    const div = parseFloat(primeiroNumero) / parseFloat(segundoNumero);
 
     switch (operacao) {
-      case adicao:
+      case "adicao":
         res.status(200).send(`<h1>${soma}</h1>`);
         break;
-      case subtracao:
+      case "subtracao":
         res.status(200).send(`<h1>${sub}</h1>`);
         break;
-      case multiplicacao:
+      case "multiplicacao":
         res.status(200).send(`<h1>${mult}</h1>`);
         break;
-      case divisao:
-            if (segundoNumero == 0){
-      return res.status(400).send(`IMPOSSIVEL DIVIDIR POR ZERO!!!!`)
-    }
+      case "divisao":
+        if (parseFloat(segundoNumero) === 0) {
+          return res.status(400).send(`IMPOSSIVEL DIVIDIR POR ZERO!!!!`);
+        }
         res.status(200).send(`<h1>${div}</h1>`);
         break;
+      default:
+        res.status(400).send(`Operação inválida!`);
     }
   } catch (error) {
     console.error("Erro capturado:", error);

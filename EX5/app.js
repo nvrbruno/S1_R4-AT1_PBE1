@@ -2,31 +2,39 @@ const express = require("express");
 const app = express();
 const PORT = 8081;
 
-app.get("/saudacao?nome/hora", (req, res) => {
+app.get("/saudacao", (req, res) => {
   try {
-    const { nome } = req.query;
-    const { hora } = req.query;
+    const { nome, hora } = req.query;
 
-    if (
-      hora === undefined ||
-      hora === "" ||
-      isNaN(hora) ||
-    ) {
+    if (!nome || !hora || isNaN(hora)) {
       return res
         .status(400)
-        .send(`Campos obrigatórios não preenchidos ou inválidos!`);
+        .send("Campos obrigatórios não preenchidos ou inválidos!");
     }
 
-        if (hora > 24){
-      return res.status(400).send(`HORA INVALIDA`)
-      else if (hora > 18 && 4 da manha){
-      return res.status(400).send(`boa noite ${nome}`)
-      else
-        return res.status(400).send(`bom dia ${nome}`)
+    const horaNumero = parseInt(hora);
+
+    if (horaNumero < 0 || horaNumero > 23) {
+      return res.status(400).send("HORA INVÁLIDA!");
     }
 
+    let saudacao = "";
+
+    if (horaNumero >= 6 && horaNumero < 12) {
+      saudacao = `Bom dia, ${nome}!`;
+    } else if (horaNumero >= 12 && horaNumero < 18) {
+      saudacao = `Boa tarde, ${nome}!`;
+    } else {
+      saudacao = `Boa noite, ${nome}!`;
+    }
+
+    return res.status(200).send(`<h1>${saudacao}</h1>`);
   } catch (error) {
     console.error("Erro capturado:", error);
-    res.status(500).send(`Erro interno no servidor`);
+    res.status(500).send("Erro interno no servidor");
   }
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });

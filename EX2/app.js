@@ -4,7 +4,14 @@ const PORT = 8081;
 
 app.get("calculadora?operacao=soma&numUm=4&numDois=6", (req, res) => {
   try {
-    const { primeiroNumero, segundoNumero, adicao, subtracao, divisao, multiplicacao } = req.query;
+    const {
+      primeiroNumero,
+      segundoNumero,
+      adicao,
+      subtracao,
+      divisao,
+      multiplicacao,
+    } = req.query;
 
     if (
       primeiroNumero === undefined ||
@@ -28,16 +35,19 @@ app.get("calculadora?operacao=soma&numUm=4&numDois=6", (req, res) => {
       case adicao:
         res.status(200).send(`<h1>${soma}</h1>`);
         break;
+
       case subtracao:
         res.status(200).send(`<h1>${sub}</h1>`);
         break;
+
       case multiplicacao:
         res.status(200).send(`<h1>${mult}</h1>`);
         break;
+
       case divisao:
-            if (segundoNumero == 0){
-      return res.status(400).send(`IMPOSSIVEL DIVIDIR POR ZERO!!!!`)
-    }
+        if (segundoNumero == 0) {
+          return res.status(400).send(`IMPOSSIVEL DIVIDIR POR ZERO!!!!`);
+        }
         res.status(200).send(`<h1>${div}</h1>`);
         break;
     }
@@ -48,7 +58,6 @@ app.get("calculadora?operacao=soma&numUm=4&numDois=6", (req, res) => {
     res.status(500).send(`Erro interno no servidor`);
   }
 });
-
 
 // inicializa o servidor e deve ser a última linha !!
 app.listen(PORT, () => {
