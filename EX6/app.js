@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 8081;
 
-app.get("/imc", (req, res) => {
+app.get("/imc?peso&altura", (req, res) => {
   try {
     const { altura, peso } = req.query;
 

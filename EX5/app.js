@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 8081;
 
-app.get("/saudacao", (req, res) => {
+app.get("/saudacao/nome?hora", (req, res) => {
   try {
     const { nome, hora } = req.query;
 

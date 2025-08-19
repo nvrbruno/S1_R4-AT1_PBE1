@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 8081;
 
-app.get("calculadora?operacao=soma&numUm=4&numDois=6", (req, res) => {
+app.get("/calculadora?operacao", (req, res) => {
   try {
     const {
       primeiroNumero,
@@ -10,6 +10,7 @@ app.get("calculadora?operacao=soma&numUm=4&numDois=6", (req, res) => {
       adicao,
       subtracao,
       divisao,
+      operacao,
       multiplicacao,
     } = req.query;
 

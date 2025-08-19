@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const PORT = 8081;
 
-app.get("/operação", (req, res) => {
+app.get("/operação/:tipo", (req, res) => {
   try {
-    const { operacao } = req.query; // pegar operação da query
+    const { tipo } = req.query; 
     const { primeiroNumero, segundoNumero } = req.query;
 
     if (
@@ -25,7 +25,7 @@ app.get("/operação", (req, res) => {
     const mult = parseFloat(primeiroNumero) * parseFloat(segundoNumero);
     const div = parseFloat(primeiroNumero) / parseFloat(segundoNumero);
 
-    switch (operacao) {
+    switch (tipo) {
       case "adicao":
         res.status(200).send(`<h1>${soma}</h1>`);
         break;
