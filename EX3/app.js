@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 8081;
 
-app.get("/operação/:tipo", (req, res) => {
+app.get("/operação", (req, res) => {
   try {
     const { tipo } = req.query; 
     const { primeiroNumero, segundoNumero } = req.query;

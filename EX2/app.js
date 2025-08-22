@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 8081;
 
-app.get("/calculadora?operacao", (req, res) => {
+app.get("/calculadora", (req, res) => {
   try {
     const {
       primeiroNumero,
